@@ -1,0 +1,217 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
+}
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
+
+    defaultConfig {
+        applicationId "com.nbs.moviedb"
+        minSdkVersion 21
+        targetSdkVersion 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        vectorDrawables {
+            useSupportLibrary true
+        }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        //Export database's schema information into a JSON file at compile time.
+                        "room.schemaLocation": "$projectDir/schemas".toString(),
+                        //Enables Gradle incremental annotation processor.
+                        "room.incremental"   : "true"]
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+
+    android {
+        sourceSets {
+            String sharedTestDir = 'src/sharedTest/java'
+            test {
+                java.srcDirs += sharedTestDir
+            }
+            androidTest {
+                java.srcDirs += sharedTestDir
+            }
+        }
+    }
+
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // ktx
+    def ktxVersion = "1.6.0"
+    implementation "androidx.core:core-ktx:$ktxVersion"
+
+    // fragment
+    def fgmKtxVersion = "1.3.5"
+    implementation "androidx.fragment:fragment-ktx:$fgmKtxVersion"
+
+    // navigation
+    def navVersion = "2.3.5"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$navVersion"
+
+    // app compat
+    def appCompatVersion = "1.3.0"
+    implementation "androidx.appcompat:appcompat:$appCompatVersion"
+
+    // material design
+    def materialVersion = "1.4.0"
+    implementation "com.google.android.material:material:$materialVersion"
+
+    // constraint layout
+    def constraintLayoutVersion = "2.0.4"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
+
+    // recycler view
+    def recyclerViewVersion = "1.2.1"
+    implementation "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+
+    // swipe refresh layout.
+    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
+
+    // coil
+    def coilVersion = "1.2.2"
+    implementation "io.coil-kt:coil:$coilVersion"
+
+    // liveData
+    def liveDataVersion = "2.3.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$liveDataVersion"
+
+    // moshi
+    def moshiVersion = "1.12.0"
+    implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshiVersion"
+
+    // retrofit
+    def retrofitVersion = "2.9.0"
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
+
+    def okhttpLoggingInterceptorVersion = "4.9.1"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingInterceptorVersion"
+
+    def coroutinesVersion = "1.5.0"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+
+    // koin
+    def koinVersion = '2.2.2'
+    implementation "org.koin:koin-core:$koinVersion" // Koin for Kotlin
+    implementation "org.koin:koin-android:$koinVersion" // Koin for Android
+    implementation "org.koin:koin-androidx-viewmodel:$koinVersion"
+    // Koin Android ViewModel features
+    implementation "org.koin:koin-androidx-scope:$koinVersion" // Koin AndroidX Scope features
+    androidTestImplementation "org.koin:koin-test:$koinVersion" // Koin testing tools
+
+    // room
+    def roomVersion = "2.3.0"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+
+    // logging
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+
+    /**
+     * TESTING DEPENDENCY
+     */
+    // junit
+    def junitVersion = "4.13.2"
+    testImplementation "junit:junit:$junitVersion"
+    def junitExtVersion = "1.1.3" // junit ext
+    androidTestImplementation "androidx.test.ext:junit:$junitExtVersion"
+    testImplementation "androidx.test.ext:junit:$junitExtVersion"
+
+    // espresso
+    def espressoVersion = "3.4.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$espressoVersion"
+
+    // androidx test support
+    def androidxTestVersion = "1.4.0"
+    androidTestImplementation "androidx.test:runner:$androidxTestVersion"
+    androidTestImplementation "androidx.test:rules:$androidxTestVersion"
+    testImplementation "androidx.test:runner:$androidxTestVersion"
+    testImplementation "androidx.test:rules:$androidxTestVersion"
+
+    testImplementation "androidx.test:core:$androidxTestVersion"
+
+    def acrTestingVersion = "2.1.0"
+    testImplementation "androidx.arch.core:core-testing:$acrTestingVersion"
+    androidTestImplementation "androidx.arch.core:core-testing:$acrTestingVersion"
+
+    // truth
+    def truthVersion = "1.1.3"
+    testImplementation "com.google.truth:truth:$truthVersion"
+
+    // coroutine
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutinesVersion"
+
+    // mockk
+    def mockkVersion = "1.11.0"
+    testImplementation "io.mockk:mockk:$mockkVersion"
+    androidTestImplementation "io.mockk:mockk-android:$mockkVersion"
+
+    // mockWebServer
+    testImplementation "com.squareup.okhttp3:mockwebserver:4.9.1"
+
+    // room
+    testImplementation "androidx.room:room-testing:$roomVersion"
+    androidTestImplementation "androidx.room:room-testing:$roomVersion"
+
+    // robolectric
+    def robolectricVersion = "4.5.1"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+
+    // uiautomator
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "1.8"
+        freeCompilerArgs += [
+                "-Xopt-in=kotlin.RequiresOptIn"
+        ]
+    }
+}
+
+secrets {
+    // A properties file containing default API_KEY values.
+    defaultPropertiesFileName = "api.properties"
+}
