@@ -1,0 +1,14 @@
+package com.nbs.moviedb.data.source.remote
+
+import com.nbs.moviedb.domain.models.Movie
+
+/**
+ * Created by aydbtiko on 7/6/2021.
+ *
+ */
+interface MovieRemoteDataSource {
+
+    suspend fun getDiscoverMovie(): List<Movie>
+    suspend fun getPopularMovie(): List<Movie>
+    suspend fun getComingSoonMovie(year: String): List<Movie>
+}

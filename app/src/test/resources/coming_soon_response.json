@@ -1,0 +1,418 @@
+{
+  "page": 1,
+  "results": [
+    {
+      "adult": false,
+      "backdrop_path": null,
+      "genre_ids": [
+        28,
+        80,
+        53
+      ],
+      "id": 603692,
+      "original_language": "en",
+      "original_title": "John Wick: Chapter 4",
+      "overview": "",
+      "popularity": 72.779,
+      "poster_path": "/kPsRQfoyYgcpbI6hvDQvUSCo0q3.jpg",
+      "release_date": "2022-05-25",
+      "title": "John Wick: Chapter 4",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/z3ElnHwcf1g56Qlp53yGbPsGXL7.jpg",
+      "genre_ids": [
+        28,
+        12,
+        878,
+        14
+      ],
+      "id": 76600,
+      "original_language": "en",
+      "original_title": "Avatar 2",
+      "overview": "Twelve years after exploring Pandora and joining the Na’vi, Jake Sully has since raised a family with Neytiri and established himself within the clans of the new world. Of course, peace can only last so long. Especially when the military organization from the original film returns to “finish what they started”.",
+      "popularity": 71.943,
+      "poster_path": "/110CYDvtnVRWs9meC4lsZCz98vg.jpg",
+      "release_date": "2022-12-14",
+      "title": "Avatar 2",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/mLY3oqwFkNZ65ZMtI5CTKFFz60i.jpg",
+      "genre_ids": [
+        28,
+        12,
+        878,
+        14,
+        18
+      ],
+      "id": 298618,
+      "original_language": "en",
+      "original_title": "The Flash",
+      "overview": "The Flash travels back in time to prevent the murder of his mother, an act which disrupts time significantly.",
+      "popularity": 62.688,
+      "poster_path": "/oduJooXJya3u6wuA6FgljAFCEQp.jpg",
+      "release_date": "2022-11-03",
+      "title": "The Flash",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/4OTYefcAlaShn6TGVK33UxLW9R7.jpg",
+      "genre_ids": [
+        28,
+        12,
+        35
+      ],
+      "id": 476669,
+      "original_language": "en",
+      "original_title": "The King's Man",
+      "overview": "As a collection of history's worst tyrants and criminal masterminds gather to plot a war to wipe out millions, one man must race against time to stop them.",
+      "popularity": 85.093,
+      "poster_path": "/nj5HmHRZsrYQEYYXyAusFv35erP.jpg",
+      "release_date": "2021-12-22",
+      "title": "The King's Man",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/xzjSrEMDQEAsPvpjS24MZ9XAvJt.jpg",
+      "genre_ids": [
+        28,
+        80,
+        18
+      ],
+      "id": 414906,
+      "original_language": "en",
+      "original_title": "The Batman",
+      "overview": "",
+      "popularity": 40.689,
+      "poster_path": "/gmU7P3FzGFsl2wiSDhx9znZCNub.jpg",
+      "release_date": "2022-03-03",
+      "title": "The Batman",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/wnUsZKxtS8gSl7xIEif97zIwi3b.jpg",
+      "genre_ids": [
+        10751,
+        878,
+        35
+      ],
+      "id": 675353,
+      "original_language": "en",
+      "original_title": "Sonic the Hedgehog 2",
+      "overview": "After settling in Green Hills, Sonic is ready for more freedom, and Tom and Maddie agree to leave him home while they go on vacation. But, no sooner are they gone, when Dr. Robotnik comes back, this time with a new partner, Knuckles, in search for an emerald that has the power to both build and destroy civilizations. Sonic teams up with his own sidekick, Tails, and together they embark on a journey to find the emerald before it falls into the wrong hands.",
+      "popularity": 42.548,
+      "poster_path": "/tvOU2SSdIdf3aJ1y27EGJfRGA0U.jpg",
+      "release_date": "2022-04-06",
+      "title": "Sonic the Hedgehog 2",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/flTnaBaW1UnQtzGEIoHR7C3OYfy.jpg",
+      "genre_ids": [
+        12,
+        28,
+        878,
+        53
+      ],
+      "id": 507086,
+      "original_language": "en",
+      "original_title": "Jurassic World: Dominion",
+      "overview": "Plot unknown.",
+      "popularity": 57.779,
+      "poster_path": "/n9dgFDOsIXUPzCkJsoy9J3Yc3O8.jpg",
+      "release_date": "2022-06-09",
+      "title": "Jurassic World: Dominion",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/ggEKIzP5An3vnSfj271ApaJYtQw.jpg",
+      "genre_ids": [
+        10751,
+        16,
+        28,
+        12,
+        35
+      ],
+      "id": 438148,
+      "original_language": "en",
+      "original_title": "Minions: The Rise of Gru",
+      "overview": "A fanboy of a supervillain supergroup known as the Vicious 6, Gru hatches a plan to become evil enough to join them, with the backup of his followers, the Minions.",
+      "popularity": 42.16,
+      "poster_path": "/wKiOkZTN9lUUUNZLmtnwubZYONg.jpg",
+      "release_date": "2022-06-23",
+      "title": "Minions: The Rise of Gru",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/ppehJ5HlIcqFpH9erwjwFGKdIoe.jpg",
+      "genre_ids": [
+        16,
+        28,
+        878,
+        35,
+        12
+      ],
+      "id": 569094,
+      "original_language": "en",
+      "original_title": "Spider-Man: Into the Spider-Verse 2",
+      "overview": "The continuing story of Miles Morales and the many other Spider-People from different realities.",
+      "popularity": 39.36,
+      "poster_path": "/8ycplQbTU6DRRwiG95lQEpYkOVg.jpg",
+      "release_date": "2022-10-06",
+      "title": "Spider-Man: Into the Spider-Verse 2",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/kdUArJCSTW8bpJipOqkvCZsVEqi.jpg",
+      "genre_ids": [
+        27,
+        28,
+        878,
+        53
+      ],
+      "id": 526896,
+      "original_language": "en",
+      "original_title": "Morbius",
+      "overview": "Dangerously ill with a rare blood disorder, and determined to save others suffering his same fate, Dr. Michael Morbius attempts a desperate gamble. What at first appears to be a radical success soon reveals itself to be a remedy potentially worse than the disease.",
+      "popularity": 39.935,
+      "poster_path": "/4Mdf5XXKcgLWFtMDSJTtelPvjeY.jpg",
+      "release_date": "2022-01-19",
+      "title": "Morbius",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/x7Vx9gBbGPnNoYNKnDTdaDABGxJ.jpg",
+      "genre_ids": [
+        16,
+        18,
+        14
+      ],
+      "id": 533514,
+      "original_language": "ja",
+      "original_title": "劇場版 ヴァイオレット・エヴァーガーデン",
+      "overview": "While writing other people's emotions, she may have neglected her own. Violet Evergarden, the child soldier turned Auto Memory Doll, writes letters that evoke the words her clients can't. But when a terminally ill boy requests her services for his family, her own feelings about love and loss resurface. Now she must confront her past and the death of the Major.",
+      "popularity": 29.507,
+      "poster_path": "/fwSonK8WrAEqWY7sqjvGRCgzIij.jpg",
+      "release_date": "2020-09-18",
+      "title": "Violet Evergarden: The Movie",
+      "video": false,
+      "vote_average": 8.5,
+      "vote_count": 72
+    },
+    {
+      "adult": false,
+      "backdrop_path": null,
+      "genre_ids": [
+        28,
+        878,
+        12
+      ],
+      "id": 667538,
+      "original_language": "en",
+      "original_title": "Transformers: Rise of the Beasts",
+      "overview": "The origins of the Maximals and the Predacons. Preserves Optimus Prime and how he became the leader of the Autobots during 1994.",
+      "popularity": 32.067,
+      "poster_path": "/bgz1IdXKb1l2PyVQnWRkOw96VGA.jpg",
+      "release_date": "2022-06-22",
+      "title": "Transformers: Rise of the Beasts",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/1xaib1Y52yZPvu4oyiZu6LNC1uj.jpg",
+      "genre_ids": [
+        28,
+        12,
+        878
+      ],
+      "id": 505642,
+      "original_language": "en",
+      "original_title": "Black Panther: Wakanda Forever",
+      "overview": "The sequel to Black Panther (2018).",
+      "popularity": 29.974,
+      "poster_path": "/6N6Rr1Y5wsi2KbTP4hFAP3hnWQE.jpg",
+      "release_date": "2022-07-06",
+      "title": "Black Panther: Wakanda Forever",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": null,
+      "genre_ids": [
+        14,
+        28,
+        12,
+        27
+      ],
+      "id": 453395,
+      "original_language": "en",
+      "original_title": "Doctor Strange in the Multiverse of Madness",
+      "overview": "Dr. Stephen Strange's continuing research on the Time Stone is hindered by a friend-turned-enemy, resulting in Strange unleashing unspeakable evil.",
+      "popularity": 25.988,
+      "poster_path": "/cSUFuITYSoilm4pZyXVI4bzHnJ3.jpg",
+      "release_date": "2022-03-23",
+      "title": "Doctor Strange in the Multiverse of Madness",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/qTQBFEc3GnPJNVs9uoaBSMwiVbq.jpg",
+      "genre_ids": [
+        16,
+        10751,
+        35,
+        14
+      ],
+      "id": 421892,
+      "original_language": "en",
+      "original_title": "Shrek 5",
+      "overview": "Plot unknown. A soft-reboot of the animated \"Shrek\" franchise.",
+      "popularity": 28.422,
+      "poster_path": "/wAh1Qs14oPtkiwol0HrdZN75fYt.jpg",
+      "release_date": "2022-09-30",
+      "title": "Shrek 5",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": null,
+      "genre_ids": [
+        14
+      ],
+      "id": 338953,
+      "original_language": "en",
+      "original_title": "Fantastic Beasts 3",
+      "overview": "The third instalment in the Fantastic Beasts franchise.",
+      "popularity": 23.504,
+      "poster_path": "/x3QetXpgs0JR30FuA7mtSrU5ENR.jpg",
+      "release_date": "2022-07-13",
+      "title": "Fantastic Beasts 3",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/qB3HdCZKHWU33k9QYTIZaM4v5qo.jpg",
+      "genre_ids": [
+        28,
+        12,
+        14,
+        35,
+        878
+      ],
+      "id": 616037,
+      "original_language": "en",
+      "original_title": "Thor: Love and Thunder",
+      "overview": "The fourth installment of the Marvel Studios' Thor movie series.",
+      "popularity": 27.005,
+      "poster_path": "/ifx23jgqQ8ZjUb9eiGjwbKtf0qQ.jpg",
+      "release_date": "2022-04-28",
+      "title": "Thor: Love and Thunder",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/3AbHZcRdon7TmpqracuQqgJxOGE.jpg",
+      "genre_ids": [
+        28,
+        12,
+        878,
+        14
+      ],
+      "id": 609681,
+      "original_language": "en",
+      "original_title": "The Marvels",
+      "overview": "The sequel to Captain Marvel (2019).",
+      "popularity": 19.361,
+      "poster_path": "/bnz17wOkp9O0c9JADOncEx0Q1sJ.jpg",
+      "release_date": "2022-11-09",
+      "title": "The Marvels",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": null,
+      "genre_ids": [
+        18,
+        28
+      ],
+      "id": 677179,
+      "original_language": "en",
+      "original_title": "Creed III",
+      "overview": "The third installment of Creed franchise.",
+      "popularity": 12.724,
+      "poster_path": "/dpiw4HlyygSDAGN57M1Zl2SNpaz.jpg",
+      "release_date": "2022-11-23",
+      "title": "Creed III",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    },
+    {
+      "adult": false,
+      "backdrop_path": "/2ycdhulWPq2C69lYxKKWFgzJjog.jpg",
+      "genre_ids": [
+        10751,
+        35,
+        16
+      ],
+      "id": 598331,
+      "original_language": "en",
+      "original_title": "Rumble",
+      "overview": "In a world where monster wrestling is a global sport and monsters are superstar athletes, teenage Winnie seeks to follow in her father’s footsteps by coaching a loveable underdog monster into a champion.",
+      "popularity": 13.022,
+      "poster_path": "/eK5t1LcRG6k4R0ZY2aJxoU8Tfse.jpg",
+      "release_date": "2022-01-22",
+      "title": "Rumble",
+      "video": false,
+      "vote_average": 0,
+      "vote_count": 0
+    }
+  ],
+  "total_pages": 13,
+  "total_results": 257
+}
