@@ -1,8 +1,10 @@
 package com.nbs.moviedb.data.source.remote
 
 import com.google.common.truth.Truth.assertThat
+import com.nbs.moviedb.data.source.remote.models.asDomainModel
 import com.nbs.moviedb.data.source.remote.models.asDomainModels
 import com.nbs.moviedb.data.source.remote.utils.ApiServiceTestRule
+import com.nbs.moviedb.data.source.remote.utils.ResponseBuilder.Companion.DETAIL_MOVIE_ID_PATH_VALUE
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -57,5 +59,15 @@ class MovieRemoteDataSourceImplTest {
         val result = movieRemoteDataSource.getComingSoonMovie(year)
         // then
         assertThat(result).containsExactlyElementsIn(movies)
+    }
+
+    @Test
+    fun `get detail movie, contain expected values`(): Unit = runBlocking {
+        val movieId = DETAIL_MOVIE_ID_PATH_VALUE
+        val detailMovie = apiServiceTestRule.responseBuilder!!.getDetailResponse().asDomainModel()
+        // when
+        val result = movieRemoteDataSource.getDetailMovie(movieId)
+        // then
+        assertThat(result).isEqualTo(detailMovie)
     }
 }

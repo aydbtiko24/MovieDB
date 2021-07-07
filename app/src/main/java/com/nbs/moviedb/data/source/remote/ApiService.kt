@@ -1,8 +1,10 @@
 package com.nbs.moviedb.data.source.remote
 
 import com.nbs.moviedb.BuildConfig.API_KEY
+import com.nbs.moviedb.data.source.remote.models.DetailMovieDto
 import com.nbs.moviedb.data.source.remote.models.MovieResponse
 import com.nbs.moviedb.domain.repository.ApiConstants.BASE_URL
+import com.nbs.moviedb.domain.repository.ApiConstants.detailPath
 import com.nbs.moviedb.domain.repository.ApiConstants.discoverPath
 import com.nbs.moviedb.domain.repository.ApiConstants.includeAdultQuery
 import com.nbs.moviedb.domain.repository.ApiConstants.includeAdultQueryValue
@@ -11,6 +13,7 @@ import com.nbs.moviedb.domain.repository.ApiConstants.includeVideoQueryValue
 import com.nbs.moviedb.domain.repository.ApiConstants.keyQuery
 import com.nbs.moviedb.domain.repository.ApiConstants.languageQuery
 import com.nbs.moviedb.domain.repository.ApiConstants.languageQueryValue
+import com.nbs.moviedb.domain.repository.ApiConstants.movieIdPath
 import com.nbs.moviedb.domain.repository.ApiConstants.pageQuery
 import com.nbs.moviedb.domain.repository.ApiConstants.pageQueryPopularValue
 import com.nbs.moviedb.domain.repository.ApiConstants.pageQueryValue
@@ -24,6 +27,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import timber.log.Timber
 
@@ -59,6 +63,13 @@ interface ApiService {
         @Query(pageQuery) page: Int = pageQueryValue,
         @Query(yearQuery) year: String
     ): MovieResponse
+
+    @GET(detailPath)
+    suspend fun getDetailMovie(
+        @Path(movieIdPath) movieId: Long,
+        @Query(keyQuery) apiKey: String = API_KEY,
+        @Query(languageQuery) language: String = languageQueryValue,
+    ): DetailMovieDto
 
     companion object {
 

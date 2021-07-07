@@ -1,6 +1,7 @@
 package com.nbs.moviedb.data.source.remote
 
 import com.nbs.moviedb.data.source.remote.models.asDomainModel
+import com.nbs.moviedb.domain.models.DetailMovie
 import com.nbs.moviedb.domain.models.Movie
 
 /**
@@ -27,5 +28,9 @@ class MovieRemoteDataSourceImpl(
         return apiService.getComingSoonMovies(year = year).results.map {
             it.asDomainModel()
         }
+    }
+
+    override suspend fun getDetailMovie(movieId: Long): DetailMovie {
+        return apiService.getDetailMovie(movieId = movieId).asDomainModel()
     }
 }

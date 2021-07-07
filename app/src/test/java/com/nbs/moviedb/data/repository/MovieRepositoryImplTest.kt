@@ -1,8 +1,10 @@
 package com.nbs.moviedb.data.repository
 
 import com.nbs.moviedb.data.source.remote.MovieRemoteDataSource
+import com.nbs.moviedb.data.source.remote.models.asDomainModel
 import com.nbs.moviedb.data.source.remote.models.asDomainModels
 import com.nbs.moviedb.data.source.remote.utils.ResponseBuilder
+import com.nbs.moviedb.data.source.remote.utils.ResponseBuilder.Companion.DETAIL_MOVIE_ID_PATH_VALUE
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -64,5 +66,16 @@ class MovieRepositoryImplTest {
         movieRepository.getComingSoonMovie(year).first()
         // then
         coVerify { movieRemoteDataSource.getComingSoonMovie(year) }
+    }
+
+    @Test
+    fun `get detail movie invoked on remote data source`() = runBlockingTest {
+        val movieId = DETAIL_MOVIE_ID_PATH_VALUE
+        val detailMovie = responseBuilder.getDetailResponse().asDomainModel()
+        coEvery { movieRemoteDataSource.getDetailMovie(movieId) } returns detailMovie
+        // when
+        movieRepository.getDetailMovie(movieId).first()
+        // then
+        coVerify { movieRemoteDataSource.getDetailMovie(movieId) }
     }
 }

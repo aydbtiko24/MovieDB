@@ -1,6 +1,7 @@
 package com.nbs.moviedb.data.repository
 
 import com.nbs.moviedb.data.source.remote.MovieRemoteDataSource
+import com.nbs.moviedb.domain.models.DetailMovie
 import com.nbs.moviedb.domain.models.Movie
 import com.nbs.moviedb.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
@@ -24,5 +25,9 @@ class MovieRepositoryImpl(
 
     override fun getComingSoonMovie(year: String): Flow<List<Movie>> = flow {
         emit(movieRemoteDataSource.getComingSoonMovie(year))
+    }
+
+    override fun getDetailMovie(movieId: Long): Flow<DetailMovie> = flow {
+        emit(movieRemoteDataSource.getDetailMovie(movieId))
     }
 }

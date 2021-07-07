@@ -2,6 +2,8 @@ package com.nbs.moviedb.data.source.remote.utils
 
 import com.nbs.moviedb.BuildConfig.API_KEY
 import com.nbs.moviedb.data.source.remote.utils.ResponseBuilder.Companion.COMING_SOON_RESPONSE_NAME
+import com.nbs.moviedb.data.source.remote.utils.ResponseBuilder.Companion.DETAIL_MOVIE_ID_PATH_VALUE
+import com.nbs.moviedb.data.source.remote.utils.ResponseBuilder.Companion.DETAIL_RESPONSE_NAME
 import com.nbs.moviedb.data.source.remote.utils.ResponseBuilder.Companion.DISCOVER_RESPONSE_NAME
 import com.nbs.moviedb.data.source.remote.utils.ResponseBuilder.Companion.POPULAR_RESPONSE_NAME
 import okhttp3.mockwebserver.Dispatcher
@@ -27,6 +29,7 @@ class SuccessDispatcher : Dispatcher() {
             "=popularity.desc&include_adult=false&include_video=false&page=1"
     private val popularPath = "/discover/movie?api_key=$API_KEY&language=en-US&sort_by" +
             "=popularity.desc&include_adult=false&include_video=false&page=2"
+    private val detailPath = "/movie/$DETAIL_MOVIE_ID_PATH_VALUE?api_key=$API_KEY&language=en-US"
 
     override fun dispatch(request: RecordedRequest): MockResponse {
         return when (request.path) {
@@ -38,6 +41,9 @@ class SuccessDispatcher : Dispatcher() {
             )
             popularPath -> mockResponse.setBody(
                 responseBuilder.get(POPULAR_RESPONSE_NAME)
+            )
+            detailPath -> mockResponse.setBody(
+                responseBuilder.get(DETAIL_RESPONSE_NAME)
             )
             else -> errorMockResponse
         }

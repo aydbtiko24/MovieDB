@@ -27,9 +27,9 @@ object ApiConstants {
     const val languageQueryValue = "en-US"
 
     /** url path*/
-    const val movieIdPath = "{movie_id}"
+    const val movieIdPath = "movie_id"
     const val discoverPath = "discover/movie"
-    const val detailPath = "movie/$movieIdPath"
+    const val detailPath = "movie/{$movieIdPath}"
 
     /** image url*/
     const val backdropUrl = "https://image.tmdb.org/t/p/w780"
