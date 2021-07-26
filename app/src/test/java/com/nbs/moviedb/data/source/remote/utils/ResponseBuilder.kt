@@ -1,5 +1,7 @@
 package com.nbs.moviedb.data.source.remote.utils
 
+import com.nbs.moviedb.data.source.remote.models.CastDto
+import com.nbs.moviedb.data.source.remote.models.CastResponse
 import com.nbs.moviedb.data.source.remote.models.DetailMovieDto
 import com.nbs.moviedb.data.source.remote.models.MovieResponse
 import com.squareup.moshi.Moshi
@@ -46,12 +48,19 @@ class ResponseBuilder {
         return jsonAdapter.fromJson(response) ?: throw invalidResponseException
     }
 
+    fun getCastResponse(): CastResponse {
+        val response = get(CAST_RESPONSE_NAME)
+        val jsonAdapter = moshi.adapter(CastResponse::class.java)
+        return jsonAdapter.fromJson(response) ?: throw invalidResponseException
+    }
+
     companion object {
 
         const val COMING_SOON_RESPONSE_NAME = "coming_soon_response.json"
         const val DISCOVER_RESPONSE_NAME = "discover_response.json"
         const val POPULAR_RESPONSE_NAME = "popular_response.json"
         const val DETAIL_RESPONSE_NAME = "detail_response.json"
+        const val CAST_RESPONSE_NAME = "cast_response.json"
 
         // path value
         const val DETAIL_MOVIE_ID_PATH_VALUE: Long = 520763

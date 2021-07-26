@@ -1,6 +1,7 @@
 package com.nbs.moviedb.data.repository
 
 import com.nbs.moviedb.data.source.remote.MovieRemoteDataSource
+import com.nbs.moviedb.domain.models.Cast
 import com.nbs.moviedb.domain.models.DetailMovie
 import com.nbs.moviedb.domain.models.Movie
 import com.nbs.moviedb.domain.repository.MovieRepository
@@ -29,5 +30,9 @@ class MovieRepositoryImpl(
 
     override fun getDetailMovie(movieId: Long): Flow<DetailMovie> = flow {
         emit(movieRemoteDataSource.getDetailMovie(movieId))
+    }
+
+    override fun getMovieCast(movieId: Long): Flow<List<Cast>> = flow {
+        emit(movieRemoteDataSource.getMovieCast(movieId))
     }
 }

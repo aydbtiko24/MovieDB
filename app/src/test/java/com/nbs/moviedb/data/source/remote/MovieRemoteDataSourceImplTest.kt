@@ -70,4 +70,15 @@ class MovieRemoteDataSourceImplTest {
         // then
         assertThat(result).isEqualTo(detailMovie)
     }
+
+    @Test
+    fun `get movie cast, contain expected values`(): Unit = runBlocking {
+        val movieId = DETAIL_MOVIE_ID_PATH_VALUE
+        val movieCasts =
+            apiServiceTestRule.responseBuilder!!.getCastResponse().casts.asDomainModels()
+        // when
+        val result = movieRemoteDataSource.getMovieCast(movieId)
+        // then
+        assertThat(result).isEqualTo(movieCasts)
+    }
 }

@@ -39,7 +39,7 @@ fun ImageView.setCircleImageUrl(imageUrl: String?) {
     imageUrl?.let { url ->
         load(url) {
             crossfade(enable = true)
-            error(android.R.color.darker_gray)
+            error(R.drawable.ic_avatar)
             transformations(CircleCropTransformation())
         }
     }

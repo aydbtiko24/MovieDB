@@ -30,6 +30,7 @@ object ApiConstants {
     const val movieIdPath = "movie_id"
     const val discoverPath = "discover/movie"
     const val detailPath = "movie/{$movieIdPath}"
+    const val castPath = "movie/{$movieIdPath}/credits"
 
     /** image url*/
     const val backdropUrl = "https://image.tmdb.org/t/p/w780"

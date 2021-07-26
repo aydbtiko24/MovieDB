@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="cast"
+            type="com.nbs.moviedb.domain.models.Cast" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_avatar"
+            android:layout_width="@dimen/cast_avatar_size"
+            android:layout_height="@dimen/cast_avatar_size"
+            android:scaleType="centerCrop"
+            app:circleImageUrl="@{cast.imgUrl}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_year"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/keyline_5"
+            android:maxLines="2"
+            android:text="@{cast.name}"
+            android:textAlignment="center"
+            android:textAppearance="?textAppearanceBody1"
+            android:textColor="@color/text_color_medium"
+            android:textSize="@dimen/text_small"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_avatar"
+            app:lineHeight="16.71dp"
+            tools:text="@tools:sample/full_names" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

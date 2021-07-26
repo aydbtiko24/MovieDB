@@ -1,6 +1,8 @@
 package com.nbs.moviedb.data.source.remote
 
 import com.nbs.moviedb.data.source.remote.models.asDomainModel
+import com.nbs.moviedb.data.source.remote.models.asDomainModels
+import com.nbs.moviedb.domain.models.Cast
 import com.nbs.moviedb.domain.models.DetailMovie
 import com.nbs.moviedb.domain.models.Movie
 
@@ -32,5 +34,9 @@ class MovieRemoteDataSourceImpl(
 
     override suspend fun getDetailMovie(movieId: Long): DetailMovie {
         return apiService.getDetailMovie(movieId = movieId).asDomainModel()
+    }
+
+    override suspend fun getMovieCast(movieId: Long): List<Cast> {
+        return apiService.getMovieCast(movieId = movieId).casts.asDomainModels()
     }
 }

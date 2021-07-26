@@ -1,6 +1,31 @@
 <resources>
     <string name="app_name">MovieDB</string>
 
-    <string name="remove_from_favorite">Remove from favorite</string>
-    <string name="add_to_favorite">Add to favorite</string>
+    <string name="nav_home_title">Home</string>
+    <string name="nav_popular_title">Popular</string>
+    <string name="nav_favorite_title">Favorite</string>
+    <string name="nav_more_title">More</string>
+
+    <string name="popular_movie_label">Popular Movies</string>
+    <string name="coming_soon_movie_label">Coming Soon</string>
+    <string name="action_retry">Retry</string>
+
+    <string name="search_hint">Search</string>
+    <string name="search_result"><![CDATA[Showing result of <b>‘%1$s‘</b>]]></string>
+
+    <string name="popular_title_overview">%1$s - %2$s</string>
+
+    <string name="empty_favorite_hint">No favorite movie yet.</string>
+    <string name="dummy_duration">1h 29m</string>
+    <string name="watch_trailer_label">Watch Trailer</string>
+
+    <string name="remove_from_favorite">Remove Favorite</string>
+    <string name="add_to_favorite">Add To Favorite</string>
+
+    <string name="notification_label">Notification</string>
+
+    <string name="dummy_genres">Horor, Trailer</string>
+    <string name="not_implemented_yet">Not implemented yet</string>
+    <string name="cast_label">Cast</string>
+
 </resources>

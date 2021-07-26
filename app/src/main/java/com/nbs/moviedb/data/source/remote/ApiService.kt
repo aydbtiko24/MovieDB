@@ -1,9 +1,11 @@
 package com.nbs.moviedb.data.source.remote
 
 import com.nbs.moviedb.BuildConfig.API_KEY
+import com.nbs.moviedb.data.source.remote.models.CastResponse
 import com.nbs.moviedb.data.source.remote.models.DetailMovieDto
 import com.nbs.moviedb.data.source.remote.models.MovieResponse
 import com.nbs.moviedb.domain.repository.ApiConstants.BASE_URL
+import com.nbs.moviedb.domain.repository.ApiConstants.castPath
 import com.nbs.moviedb.domain.repository.ApiConstants.detailPath
 import com.nbs.moviedb.domain.repository.ApiConstants.discoverPath
 import com.nbs.moviedb.domain.repository.ApiConstants.includeAdultQuery
@@ -70,6 +72,13 @@ interface ApiService {
         @Query(keyQuery) apiKey: String = API_KEY,
         @Query(languageQuery) language: String = languageQueryValue,
     ): DetailMovieDto
+
+    @GET(castPath)
+    suspend fun getMovieCast(
+        @Path(movieIdPath) movieId: Long,
+        @Query(keyQuery) apiKey: String = API_KEY,
+        @Query(languageQuery) language: String = languageQueryValue,
+    ): CastResponse
 
     companion object {
 

@@ -78,4 +78,15 @@ class MovieRepositoryImplTest {
         // then
         coVerify { movieRemoteDataSource.getDetailMovie(movieId) }
     }
+
+    @Test
+    fun `get movie cast invoked on remote data source`() = runBlockingTest {
+        val movieId = DETAIL_MOVIE_ID_PATH_VALUE
+        val movieCasts = responseBuilder.getCastResponse().casts.asDomainModels()
+        coEvery { movieRemoteDataSource.getMovieCast(movieId) } returns movieCasts
+        // when
+        movieRepository.getMovieCast(movieId).first()
+        // then
+        coVerify { movieRemoteDataSource.getMovieCast(movieId) }
+    }
 }

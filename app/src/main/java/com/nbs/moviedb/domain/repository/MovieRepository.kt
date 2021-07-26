@@ -1,5 +1,6 @@
 package com.nbs.moviedb.domain.repository
 
+import com.nbs.moviedb.domain.models.Cast
 import com.nbs.moviedb.domain.models.DetailMovie
 import com.nbs.moviedb.domain.models.Movie
 import kotlinx.coroutines.flow.Flow
@@ -14,4 +15,5 @@ interface MovieRepository {
     fun getPopularMovie(): Flow<List<Movie>>
     fun getComingSoonMovie(year: String): Flow<List<Movie>>
     fun getDetailMovie(movieId: Long): Flow<DetailMovie>
+    fun getMovieCast(movieId: Long): Flow<List<Cast>>
 }

@@ -5,13 +5,17 @@ import com.google.common.truth.Truth.assertThat
 import com.nbs.moviedb.MainCoroutineRule
 import com.nbs.moviedb.data.source.local.asFavorite
 import com.nbs.moviedb.data.source.remote.models.asDomainModel
+import com.nbs.moviedb.data.source.remote.models.asDomainModels
 import com.nbs.moviedb.data.source.remote.utils.ResponseBuilder
 import com.nbs.moviedb.data.source.remote.utils.ResponseBuilder.Companion.DETAIL_MOVIE_ID_PATH_VALUE
+import com.nbs.moviedb.domain.models.Cast
 import com.nbs.moviedb.domain.models.DetailMovie
 import com.nbs.moviedb.domain.usecase.favorite.AddFavorite
 import com.nbs.moviedb.domain.usecase.favorite.GetIsFavorite
 import com.nbs.moviedb.domain.usecase.favorite.RemoveFavorite
 import com.nbs.moviedb.domain.usecase.movie.GetDetailMovie
+import com.nbs.moviedb.domain.usecase.movie.GetMovieCast
+import com.nbs.moviedb.presentation.utils.ErrorState
 import com.nbs.moviedb.presentation.utils.getOrWaitValue
 import com.nbs.moviedb.presentation.utils.observeForTesting
 import io.mockk.MockKAnnotations
@@ -40,6 +44,9 @@ class DetailViewModelTest {
     lateinit var getDetailMovie: GetDetailMovie
 
     @MockK
+    lateinit var getMovieCast: GetMovieCast
+
+    @MockK
     lateinit var getIsFavorite: GetIsFavorite
 
     @MockK
@@ -47,7 +54,6 @@ class DetailViewModelTest {
 
     @MockK
     lateinit var removeFavorite: RemoveFavorite
-
     private val movieId = DETAIL_MOVIE_ID_PATH_VALUE
 
     @get:Rule
@@ -55,30 +61,39 @@ class DetailViewModelTest {
 
     @get:Rule
     val instantTaskExecutorRule = InstantTaskExecutorRule()
+
     private lateinit var detailMovie: DetailMovie
+    private lateinit var movieCast:List<Cast>
 
     @Before
     fun setUp() {
         MockKAnnotations.init(this)
-        detailMovie = ResponseBuilder().getDetailResponse().asDomainModel()
+        val responseBuilder = ResponseBuilder()
+        detailMovie = responseBuilder.getDetailResponse().asDomainModel()
+        movieCast = responseBuilder.getCastResponse().casts.asDomainModels()
     }
 
     @Test
     fun `get detail movie contains expected values`() {
         // given
         every { getDetailMovie(movieId) } returns flowOf(detailMovie)
+        every { getMovieCast(movieId) } returns flowOf(movieCast)
         every { getIsFavorite(movieId) } returns flowOf(false)
         // when
         initViewModel()
         // then
         assertThat(viewModel.loadingData.getOrWaitValue()).isFalse()
         assertThat(viewModel.detailMovie.getOrWaitValue()).isEqualTo(detailMovie)
+        assertThat(
+            viewModel.movieCasts.getOrWaitValue()
+        ).containsExactlyElementsIn(movieCast)
     }
 
     @Test
     fun `get favorite movie contains expected values`() {
         // given
         every { getDetailMovie(movieId) } returns flowOf(detailMovie)
+        every { getMovieCast(movieId) } returns flowOf(movieCast)
         every { getIsFavorite(movieId) } returns flowOf(true)
         // when
         initViewModel()
@@ -90,6 +105,7 @@ class DetailViewModelTest {
     fun `get un-favorite movie contains expected values`() {
         // given
         every { getDetailMovie(movieId) } returns flowOf(detailMovie)
+        every { getMovieCast(movieId) } returns flowOf(movieCast)
         every { getIsFavorite(movieId) } returns flowOf(false)
         // when
         initViewModel()
@@ -101,6 +117,7 @@ class DetailViewModelTest {
     fun `edit favorite movie contains expected values`() = runBlockingTest {
         // given
         every { getDetailMovie(movieId) } returns flowOf(detailMovie)
+        every { getMovieCast(movieId) } returns flowOf(movieCast)
         every { getIsFavorite(movieId) } returns flowOf(true)
         initViewModel()
         viewModel.favoriteUiState.observeForTesting {
@@ -119,6 +136,7 @@ class DetailViewModelTest {
         // given
         val favorite = detailMovie.asFavorite()
         every { getDetailMovie(movieId) } returns flowOf(detailMovie)
+        every { getMovieCast(movieId) } returns flowOf(movieCast)
         every { getIsFavorite(movieId) } returns flowOf(false)
         initViewModel()
         viewModel.favoriteUiState.observeForTesting {
@@ -137,25 +155,57 @@ class DetailViewModelTest {
         // given
         val errorMessage = "something when wrong"
         every { getDetailMovie(movieId) } returns flow { throw Throwable(errorMessage) }
+        every { getMovieCast(movieId) } returns flowOf(movieCast)
         every { getIsFavorite(movieId) } returns flowOf(false)
 
         initViewModel()
 
         assertThat(viewModel.loadingData.getOrWaitValue()).isFalse()
         assertThat(
-            viewModel.loadingDataError.getOrWaitValue().getContentIfNotHandled()
-        ).isEqualTo(errorMessage)
+            viewModel.errorState.getOrWaitValue()
+        ).isEqualTo(ErrorState(message = errorMessage, visible = true))
         // when
         every { getDetailMovie(movieId) } returns flowOf(detailMovie)
+        viewModel.retryGetData()
+        // then
+        assertThat(viewModel.detailMovie.getOrWaitValue()).isEqualTo(detailMovie)
+        assertThat(
+            viewModel.errorState.getOrWaitValue()
+        ).isEqualTo(ErrorState.Initial)
+        assertThat(
+            viewModel.movieCasts.getOrWaitValue()
+        ).containsExactlyElementsIn(movieCast)
+    }
+
+    @Test
+    fun `get detail movie, error on refresh data`() {
+        // given
+        every { getDetailMovie(movieId) } returns flowOf(detailMovie)
+        every { getMovieCast(movieId) } returns flowOf(movieCast)
+        every { getIsFavorite(movieId) } returns flowOf(false)
+        initViewModel()
+        // when
+        val errorMessage = "something when wrong"
+        every { getDetailMovie(movieId) } returns flow { throw Throwable(errorMessage) }
         viewModel.getDetailMovieData()
         // then
         assertThat(viewModel.detailMovie.getOrWaitValue()).isEqualTo(detailMovie)
+        assertThat(
+            viewModel.movieCasts.getOrWaitValue()
+        ).containsExactlyElementsIn(movieCast)
+        assertThat(
+            viewModel.errorState.getOrWaitValue()
+        ).isEqualTo(ErrorState.Initial)
+        assertThat(
+            viewModel.loadingDataError.getOrWaitValue().getContentIfNotHandled()
+        ).isEqualTo(errorMessage)
     }
 
     private fun initViewModel() {
         viewModel = DetailViewModel(
             movieId = movieId,
             getDetailMovie = getDetailMovie,
+            getMovieCast = getMovieCast,
             getIsFavorite = getIsFavorite,
             addFavorite = addFavorite,
             removeFavorite = removeFavorite
