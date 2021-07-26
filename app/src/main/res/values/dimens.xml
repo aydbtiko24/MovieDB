@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="keyline_1">4dp</dimen>
+    <dimen name="keyline_2">8dp</dimen>
+    <dimen name="keyline_3">12dp</dimen>
+    <dimen name="keyline_4">14dp</dimen>
+    <dimen name="keyline_5">16dp</dimen>
+    <dimen name="keyline_6">20dp</dimen>
+    <dimen name="keyline_7">24dp</dimen>
+    <dimen name="keyline_8">30dp</dimen>
+
+    <dimen name="rounded_size">2dp</dimen>
+
+    <dimen name="discover_image_height">256dp</dimen>
+
+    <dimen name="home_movie_image_height">157dp</dimen>
+    <dimen name="home_movie_image_width">102dp</dimen>
+
+    <dimen name="popular_image_height">214dp</dimen>
+    <dimen name="popular_container_width">160dp</dimen>
+
+    <dimen name="favorite_image_height">89dp</dimen>
+    <dimen name="favorite_image_width">159dp</dimen>
+
+    <dimen name="detail_image_height">543dp</dimen>
+    <dimen name="detail_cta_margin">7dp</dimen>
+
+    <dimen name="text_extra_small">10sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_medium">14sp</dimen>
+    <dimen name="text_medium_1">16sp</dimen>
+    <dimen name="text_medium_2">18sp</dimen>
+    <dimen name="text_large">28sp</dimen>
+    <dimen name="cast_avatar_size">90dp</dimen>
+</resources>

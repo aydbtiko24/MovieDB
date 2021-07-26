@@ -9,7 +9,6 @@ import com.nbs.moviedb.domain.models.Movie
 sealed class HomeUiModel {
 
     data class DiscoverMovies(val items: List<Movie>) : HomeUiModel()
-    data class PopularMovies(val label: Int = 1, val items: List<Movie>) : HomeUiModel()
-    data class ComingSoonMovies(val label: Int = 2, val items: List<Movie>) : HomeUiModel()
-    data class Error(val message: String) : HomeUiModel()
+    data class PopularMovies(val items: List<Movie>) : HomeUiModel()
+    data class ComingSoonMovies(val items: List<Movie>) : HomeUiModel()
 }

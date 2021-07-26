@@ -14,10 +14,10 @@ import com.nbs.moviedb.domain.usecase.movie.GetHomeDiscoverMovies
 import com.nbs.moviedb.domain.usecase.movie.GetHomePopularMovies
 import com.nbs.moviedb.presentation.home.HomeUiModel.ComingSoonMovies
 import com.nbs.moviedb.presentation.home.HomeUiModel.DiscoverMovies
-import com.nbs.moviedb.presentation.home.HomeUiModel.Error
 import com.nbs.moviedb.presentation.home.HomeUiModel.PopularMovies
-import com.nbs.moviedb.presentation.utils.toYearQuery
+import com.nbs.moviedb.presentation.utils.ErrorState
 import com.nbs.moviedb.presentation.utils.getOrWaitValue
+import com.nbs.moviedb.presentation.utils.toYearQuery
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
@@ -95,8 +95,9 @@ class HomeViewModelTest {
         initViewModel()
         // then
         assertThat(viewModel.loadingData.getOrWaitValue()).isFalse()
-        val expected = listOf(Error(errorMessage))
-        assertThat(viewModel.homeUiModels.getOrWaitValue()).containsExactlyElementsIn(expected)
+        assertThat(
+            viewModel.errorState.getOrWaitValue()
+        ).isEqualTo(ErrorState(message = errorMessage, visible = true))
     }
 
     @Test
@@ -108,8 +109,9 @@ class HomeViewModelTest {
         every { getHomeComingSoonMovies(year) } returns flowOf(comingSoonMovies)
         initViewModel()
         assertThat(viewModel.loadingData.getOrWaitValue()).isFalse()
-        val errorExpected = listOf(Error(errorMessage))
-        assertThat(viewModel.homeUiModels.getOrWaitValue()).containsExactlyElementsIn(errorExpected)
+        assertThat(
+            viewModel.errorState.getOrWaitValue()
+        ).isEqualTo(ErrorState(message = errorMessage, visible = true))
         // when
         every { getHomeDiscoverMovies() } returns flowOf(discoverMovies)
         viewModel.retryGetData()
@@ -120,6 +122,9 @@ class HomeViewModelTest {
             ComingSoonMovies(items = comingSoonMovies)
         )
         assertThat(viewModel.homeUiModels.getOrWaitValue()).containsExactlyElementsIn(expected)
+        assertThat(
+            viewModel.errorState.getOrWaitValue()
+        ).isEqualTo(ErrorState.Initial)
     }
 
     @Test
@@ -130,7 +135,7 @@ class HomeViewModelTest {
         every { getHomeComingSoonMovies(year) } returns flowOf(comingSoonMovies)
         initViewModel()
         // when
-        viewModel.refreshData()
+        viewModel.getHomeData()
         // then
         assertThat(viewModel.loadingData.getOrWaitValue()).isFalse()
         val expected = listOf(
@@ -153,7 +158,7 @@ class HomeViewModelTest {
         every { getHomeDiscoverMovies() } returns flow {
             throw Throwable(errorMessage)
         }
-        viewModel.refreshData()
+        viewModel.getHomeData()
         // then
         assertThat(viewModel.loadingData.getOrWaitValue()).isFalse()
         val expected = listOf(
@@ -165,6 +170,9 @@ class HomeViewModelTest {
         assertThat(
             viewModel.loadingDataError.getOrWaitValue().getContentIfNotHandled()
         ).isEqualTo(errorMessage)
+        assertThat(
+            viewModel.errorState.getOrWaitValue()
+        ).isEqualTo(ErrorState.Initial)
     }
 
     private fun initViewModel() {

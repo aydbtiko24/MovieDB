@@ -10,6 +10,7 @@ import com.nbs.moviedb.domain.usecase.movie.GetHomePopularMovies
 import com.nbs.moviedb.presentation.home.HomeUiModel.ComingSoonMovies
 import com.nbs.moviedb.presentation.home.HomeUiModel.DiscoverMovies
 import com.nbs.moviedb.presentation.home.HomeUiModel.PopularMovies
+import com.nbs.moviedb.presentation.utils.ErrorState
 import com.nbs.moviedb.presentation.utils.Event
 import com.nbs.moviedb.presentation.utils.toYearQuery
 import java.lang.System.currentTimeMillis
@@ -34,6 +35,8 @@ class HomeViewModel(
     val loadingData: LiveData<Boolean> = _loadingData
     private val _loadingDataError = MutableLiveData<Event<String>>()
     val loadingDataError: LiveData<Event<String>> = _loadingDataError
+    private val _errorState = MutableLiveData(ErrorState.Initial)
+    val errorState: LiveData<ErrorState> = _errorState
     private val _homeUiModels = MutableLiveData<List<HomeUiModel>>()
     val homeUiModels: LiveData<List<HomeUiModel>> = _homeUiModels
 
@@ -41,7 +44,7 @@ class HomeViewModel(
         getHomeData()
     }
 
-    private fun getHomeData() = viewModelScope.launch {
+    fun getHomeData() = viewModelScope.launch {
         combine(
             getHomeDiscoverMovies(),
             getHomePopularMovies(),
@@ -63,7 +66,10 @@ class HomeViewModel(
         val errorMessage = exception.localizedMessage ?: ""
 
         if (homeDataIsEmpty) {
-            _homeUiModels.value = listOf(HomeUiModel.Error(message = errorMessage))
+            _errorState.value = ErrorState(
+                message = errorMessage,
+                visible = true
+            )
         } else {
             _loadingDataError.value = Event(errorMessage)
         }
@@ -73,12 +79,8 @@ class HomeViewModel(
         _loadingData.value = visible
     }
 
-    fun refreshData() {
-        getHomeData()
-    }
-
     fun retryGetData() {
-        _homeUiModels.value = emptyList()
-        refreshData()
+        _errorState.value = ErrorState.Initial
+        getHomeData()
     }
 }
