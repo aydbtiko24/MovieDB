@@ -8,6 +8,7 @@ import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import com.nbs.moviedb.domain.models.Movie
 import com.nbs.moviedb.domain.usecase.movie.GetPopularMovies
+import com.nbs.moviedb.presentation.utils.ErrorState
 import com.nbs.moviedb.presentation.utils.Event
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,6 +33,8 @@ class PopularViewModel(
     val loadingData: LiveData<Boolean> = _loadingData
     private val _loadingDataError = MutableLiveData<Event<String>>()
     val loadingDataError: LiveData<Event<String>> = _loadingDataError
+    private val _errorState = MutableLiveData(ErrorState.Initial)
+    val errorState: LiveData<ErrorState> = _errorState
     private val _searchQuery = MutableStateFlow("")
     private val _popularMovies = MutableStateFlow(emptyList<Movie>())
     val popularMovies: LiveData<List<Movie>> = _searchQuery
@@ -45,7 +48,7 @@ class PopularViewModel(
             }
         }.asLiveData()
     val searchQuery: LiveData<String> = _searchQuery.asLiveData()
-    val searchResultEnable: LiveData<Boolean> = searchQuery.map { it.isNotEmpty() }
+    val searchResultEnable: LiveData<Boolean> = searchQuery.map { it.trim().isNotEmpty() }
 
     init {
         getPopularData()
@@ -61,7 +64,19 @@ class PopularViewModel(
 
     private fun handleDataError(exception: Throwable) {
         val errorMessage = exception.localizedMessage ?: ""
-        _loadingDataError.value = Event(errorMessage)
+        if (_popularMovies.value.isEmpty()) {
+            _errorState.value = ErrorState(
+                message = errorMessage,
+                visible = true
+            )
+        } else {
+            _loadingDataError.value = Event(errorMessage)
+        }
+    }
+
+    fun retryGetData() {
+        _errorState.value = ErrorState.Initial
+        getPopularData()
     }
 
     private fun showLoadingData(visible: Boolean) {
@@ -70,9 +85,5 @@ class PopularViewModel(
 
     fun searchMovie(query: String) {
         _searchQuery.value = query
-    }
-
-    fun clearSearchQuery() {
-        _searchQuery.value = ""
     }
 }

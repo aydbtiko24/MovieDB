@@ -6,6 +6,7 @@ import com.nbs.moviedb.MainCoroutineRule
 import com.nbs.moviedb.data.source.remote.models.asDomainModels
 import com.nbs.moviedb.data.source.remote.utils.ResponseBuilder
 import com.nbs.moviedb.domain.models.Movie
+import com.nbs.moviedb.presentation.utils.ErrorState
 import com.nbs.moviedb.presentation.utils.getOrWaitValue
 import io.mockk.MockKAnnotations
 import io.mockk.every
@@ -68,8 +69,8 @@ class PopularViewModelTest {
         // then
         assertThat(viewModel.loadingData.getOrWaitValue()).isFalse()
         assertThat(
-            viewModel.loadingDataError.getOrWaitValue().getContentIfNotHandled()
-        ).isEqualTo(errorMessage)
+            viewModel.errorState.getOrWaitValue()
+        ).isEqualTo(ErrorState(message = errorMessage, visible = true))
     }
 
     @Test
@@ -80,16 +81,40 @@ class PopularViewModelTest {
         initViewModel()
         assertThat(viewModel.loadingData.getOrWaitValue()).isFalse()
         assertThat(
-            viewModel.loadingDataError.getOrWaitValue().getContentIfNotHandled()
-        ).isEqualTo(errorMessage)
+            viewModel.errorState.getOrWaitValue()
+        ).isEqualTo(ErrorState(message = errorMessage, visible = true))
         // when
         every { getPopularMovies() } returns flowOf(popularMovies)
-        viewModel.getPopularData()
+        viewModel.retryGetData()
         // then
-
         assertThat(
             viewModel.popularMovies.getOrWaitValue()
         ).containsExactlyElementsIn(popularMovies)
+        assertThat(
+            viewModel.errorState.getOrWaitValue()
+        ).isEqualTo(ErrorState.Initial)
+    }
+
+    @Test
+    fun `get popular movies, error on refresh data`() = runBlockingTest {
+        // given
+        every { getPopularMovies() } returns flowOf(popularMovies)
+        initViewModel()
+        assertThat(viewModel.loadingData.getOrWaitValue()).isFalse()
+        assertThat(
+            viewModel.popularMovies.getOrWaitValue()
+        ).containsExactlyElementsIn(popularMovies)
+        // when
+        val errorMessage = "something when wrong"
+        every { getPopularMovies() } returns flow { throw Throwable(errorMessage) }
+        viewModel.getPopularData()
+        // then
+        assertThat(
+            viewModel.loadingDataError.getOrWaitValue().getContentIfNotHandled()
+        ).isEqualTo(errorMessage)
+        assertThat(
+            viewModel.errorState.getOrWaitValue()
+        ).isEqualTo(ErrorState.Initial)
     }
 
     @Test
@@ -114,39 +139,9 @@ class PopularViewModelTest {
         assertThat(viewModel.searchResultEnable.getOrWaitValue()).isTrue()
     }
 
-    @Test
-    fun `get popular movies, search popular movie, clear search`() = runBlockingTest {
-        // given
-        val movie = popularMovies[3]
-        every { getPopularMovies() } returns flowOf(popularMovies)
-        initViewModel()
-        assertThat(
-            viewModel.popularMovies.getOrWaitValue()
-        ).containsExactlyElementsIn(popularMovies)
-
-        viewModel.searchMovie(movie.title)
-        advanceUntilIdle()
-
-        assertThat(viewModel.searchQuery.getOrWaitValue()).isEqualTo(movie.title)
-        assertThat(
-            viewModel.popularMovies.getOrWaitValue()
-        ).containsExactlyElementsIn(
-            listOf(movie)
-        )
-        assertThat(viewModel.searchResultEnable.getOrWaitValue()).isTrue()
-
-        // when
-        viewModel.clearSearchQuery()
-
-        // then
-        assertThat(viewModel.searchQuery.getOrWaitValue()).isEmpty()
-        assertThat(viewModel.searchResultEnable.getOrWaitValue()).isFalse()
-    }
-
     private fun initViewModel() {
         viewModel = PopularViewModel(
             getPopularMovies = getPopularMovies
         )
     }
-
 }
