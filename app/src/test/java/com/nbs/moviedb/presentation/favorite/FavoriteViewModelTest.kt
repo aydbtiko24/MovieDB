@@ -102,35 +102,6 @@ class FavoriteViewModelTest {
     }
 
     @Test
-    fun `get favorites, search favorite, clear search`() {
-        // given
-        val searchQuery = favorites[0].title.lowercase()
-        every { getFavorites("") } returns flowOf(favorites)
-        initViewModel()
-
-        every { getFavorites(searchQuery) } returns flowOf(favorites)
-        viewModel.searchFavorite(searchQuery)
-
-        assertThat(
-            viewModel.searchQuery.getOrWaitValue()
-        ).isEqualTo(searchQuery)
-        assertThat(
-            viewModel.searchResultEnable.getOrWaitValue()
-        ).isTrue()
-
-        // when
-        viewModel.clearSearchQuery()
-
-        // then
-        assertThat(
-            viewModel.searchQuery.getOrWaitValue()
-        ).isEmpty()
-        assertThat(
-            viewModel.searchResultEnable.getOrWaitValue()
-        ).isFalse()
-    }
-
-    @Test
     fun `remove favorite`() {
         // given
         val movieId = favorites[0].movieId

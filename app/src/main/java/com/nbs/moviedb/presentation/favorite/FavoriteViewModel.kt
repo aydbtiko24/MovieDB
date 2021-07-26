@@ -27,11 +27,14 @@ class FavoriteViewModel(
 
     private val _searchQuery = MutableStateFlow("")
     val searchQuery: LiveData<String> = _searchQuery.asLiveData()
-    val searchResultEnable: LiveData<Boolean> = searchQuery.map { it.isNotEmpty() }
+
+    val searchResultEnable: LiveData<Boolean> = searchQuery.map { it.trim().isNotEmpty() }
+
     private val _favorites = _searchQuery
         .map { it.trim().lowercase() }
         .flatMapLatest { searchQuery -> getFavorites(searchQuery) }
     val favorites: LiveData<List<Favorite>> = _favorites.asLiveData()
+
     val dataIsEmpty: LiveData<Boolean> = combine(
         _searchQuery,
         _favorites
@@ -41,10 +44,6 @@ class FavoriteViewModel(
 
     fun searchFavorite(query: String) {
         _searchQuery.value = query
-    }
-
-    fun clearSearchQuery() {
-        _searchQuery.value = ""
     }
 
     fun remove(movieId: Long) = viewModelScope.launch {

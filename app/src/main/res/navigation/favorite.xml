@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/favorite"
+    app:startDestination="@id/favorite_dst">
+
+    <fragment
+        android:id="@+id/favorite_dst"
+        android:name="com.nbs.moviedb.presentation.favorite.FavoriteFragment">
+        <action
+            android:id="@+id/favorite_to_detail_movie"
+            app:destination="@id/detail_movie_dst" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detail_movie_dst"
+        android:name="com.nbs.moviedb.presentation.detail.FragmentDetailMovie">
+        <argument
+            android:name="movie_id"
+            app:argType="long"
+            app:nullable="false" />
+    </fragment>
+
+</navigation>

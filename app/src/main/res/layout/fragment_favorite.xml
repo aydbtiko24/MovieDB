@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.main.MainActivity">
+
+    <data>
+
+        <variable
+            name="viewmodel"
+            type="com.nbs.moviedb.presentation.favorite.FavoriteViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/root_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/app_bar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_search_favorite"
+                style="@style/Widget.EditText.Search" />
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_popular_search_result"
+                style="@style/Widget.Text.SearchResult"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:htmlText="@{@string/search_result(viewmodel.searchQuery)}"
+                app:layout_constraintBottom_toTopOf="@id/favorite_recycler_view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:viewVisible="@{viewmodel.searchResultEnable}"
+                tools:text="Showing result of `search query`" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/favorite_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:clipToPadding="false"
+                android:paddingTop="@dimen/keyline_3"
+                android:paddingBottom="@dimen/keyline_5"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_popular_search_result"
+                tools:listitem="@layout/favorite_view_item" />
+
+            <ViewStub
+                android:id="@+id/empty_view_stub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inflatedId="@+id/empty_view"
+                android:layout="@layout/error_view"
+                android:paddingStart="@dimen/keyline_6"
+                android:paddingEnd="@dimen/keyline_6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>
