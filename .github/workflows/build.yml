@@ -34,13 +34,11 @@ jobs:
           name: unit_test_report
           path: app/build/reports/tests/testDebugUnitTest/
 
-  android-test:
+  build-apk:
     needs: [ unit-test ]
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout the code
-        uses: actions/checkout@v2
-
+      - uses: actions/checkout@v2
       - name: Cache Gradle and wrapper
         uses: actions/cache@v2
         with:
@@ -51,16 +49,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gradle-
 
-      - name: Run android tests (api 27)
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 27
-          target: default
-          arch: x86
-          script: ./gradlew connectedCheck --stacktrace
-
-      - name: Upload android test report
+      - name: Build debug APK
+        run: bash ./gradlew assembleDebug --stacktrace
+      - name: Upload APK
         uses: actions/upload-artifact@v2
         with:
-          name: android_test_report
-          path: app/build/reports/androidTests/connected/
+          name: app
+          path: app/build/outputs/apk/debug/app-debug.apk
